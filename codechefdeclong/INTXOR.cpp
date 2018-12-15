@@ -20,30 +20,102 @@ int main()
     {
         ll n;
         cin>>n;
-        ll a[n+2];
-        cout<<1<<" "<<1<<" "<<1<<" "<<1<<"\n";
-        ll k;
-        cin>>k;
-        a[1]=k;
-        for(ll i=2;i<=n;i++)
+        ll ans[n+1]={0};
+       	
+        if(n%2==0)
         {
-            cout<<1<<" "<<i<<" "<<i<<" "<<i<<"\n";
-            cin>>k;
-            a[i]=k;
-        }
-        /*cout<<1<<" "<<n-1<<" "<<n-1<<" "<<n<<"\n";
-        ll k;
-        cin>>k;
-        a[n]=k;*/
-        cout<<2<<" ";
-        f(i,1,n+1)
-        cout<<a[i]<<" ";
-        cout<<"\n";
-        cin>>k;
-        if(k==-1)
-            break;
+        	ll a,b;
+        	cout<<1<<" "<<1<<" "<<2<<" "<<3<<"\n";
+        	cin>>a;
+        	cout<<1<<" "<<2<<" "<<3<<" "<<4<<"\n";
+        	cin>>b;
+        	ll x=a^b;
+        	ll p=1,q=4;
+        	ll count=0;
+        	for(ll i=5;i<=n;i++)
+        	{
+        		ll k=0;
+        		cout<<1<<" "<<p<<" "<<q<<" "<<i<<"\n";
+        		cin>>k;
+        		ans[i]=x^k;
+        		count++;
+        		if(count==2)
+        		{
+        			//cout<<"change\n";
+        			count=0;
+        			p=i-1;
+        			q=i;
+        			x = ans[p]^ans[q];
+        		}
 
-        
+        	}
+        	ll k=0;
+    		cout<<1<<" "<<n-1<<" "<<n<<" "<<2<<"\n";
+    		cin>>k;
+    		ans[2]=ans[n-1]^ans[n]^k;
+    		cout<<1<<" "<<n-1<<" "<<n<<" "<<3<<"\n";
+    		cin>>k;
+    		ans[3]=ans[n-1]^ans[n]^k;
+    		ans[1]=a^ans[2]^ans[3];
+    		ans[4]=b^ans[2]^ans[3];
+
+
+        }
+        else
+        {
+        	ll a,b;
+        	cout<<1<<" "<<1<<" "<<2<<" "<<3<<"\n";
+        	cin>>a;
+        	cout<<1<<" "<<2<<" "<<3<<" "<<4<<"\n";
+        	cin>>b;
+        	ll x=a^b;
+        	ll p=1,q=4;
+        	ll count=0;
+        	for(ll i=5;i<=n;i++)
+        	{
+        		ll k=0;
+        		cout<<1<<" "<<p<<" "<<q<<" "<<i<<"\n";
+        		cin>>k;
+        		ans[i]=x^k;
+        		count++;
+        		if(count==2)
+        		{
+        			//cout<<"change\n";
+        			count=0;
+        			p=i-1;
+        			q=i;
+        			x = ans[p]^ans[q];
+        		}
+
+        	}
+        	ll k=0;
+    		cout<<1<<" "<<n-1<<" "<<n<<" "<<2<<"\n";
+    		cin>>k;
+    		ans[2]=ans[n-1]^ans[n]^k;
+    		cout<<1<<" "<<n-2<<" "<<n<<" "<<3<<"\n";
+    		cin>>k;
+    		ans[3]=ans[n-2]^ans[n]^k;
+    		ans[1]=a^ans[2]^ans[3];
+    		ans[4]=b^ans[2]^ans[3];
+
+
+
+        }
+
+
+
+
+
+        cout<<2<<" ";
+        for(int i=1;i<=n;i++)
+        	cout<<ans[i]<<" ";
+        cout<<"\n";
+        ll b;
+        cin>>b;
+        if(b!=1)
+        	break;
+
+
     }
    
     
