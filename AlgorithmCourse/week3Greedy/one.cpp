@@ -1,3 +1,6 @@
+// Question 1 of week 3
+
+
 #include <bits/stdc++.h>
 #define vec(a) vector<a>
 #define vecp(a,b) vector < pair< a, b > > 
@@ -17,17 +20,11 @@ typedef long long int ll;
 int main() {
     ll n;
     cin>>n;
-    ll a=0,b=1,c;
-    ll sum=0;
-    f(i,2,n+1)
-    {
-        c= a+b;
-        sum += c*c;
-        cout<<c<<" "<<sum<<"\n";
-        a=b;
-        b=c;
-        
-    }
-    
-    return 0;
+    ll ans=n/10;
+    n=n%10;
+    ans+=n/5;
+    n=n%5;
+    ans+=n;
+    cout<<ans;
+
 }

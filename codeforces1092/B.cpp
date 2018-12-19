@@ -17,17 +17,18 @@ typedef long long int ll;
 int main() {
     ll n;
     cin>>n;
-    ll a=0,b=1,c;
-    ll sum=0;
-    f(i,2,n+1)
+    ll a[n+1];
+    ll mark[n+1]={0};
+    f(i,0,n)
     {
-        c= a+b;
-        sum += c*c;
-        cout<<c<<" "<<sum<<"\n";
-        a=b;
-        b=c;
-        
+        cin>>a[i];
     }
-    
-    return 0;
+    ll sum=0;
+   sort(a,a+n);
+   f(i,0,n)
+   {
+    sum += abs(a[i]-a[i+1]);
+    i++;
+   }
+    cout<<sum;
 }

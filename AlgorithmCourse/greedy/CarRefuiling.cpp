@@ -1,3 +1,8 @@
+// You are given point A and B . You can travel L km on full tank . There are N station . Find min number of refill needed
+
+
+
+
 #include <bits/stdc++.h>
 #define vec(a) vector<a>
 #define vecp(a,b) vector < pair< a, b > > 
@@ -15,19 +20,21 @@ using namespace std;
 typedef long long int ll;
 
 int main() {
-    ll n;
-    cin>>n;
-    ll a=0,b=1,c;
-    ll sum=0;
-    f(i,2,n+1)
+    ll b,l,n;
+    cin>>b>>l>>n;
+    ll a[n+1];  
+    f(i,0,n)
+    cin>>a[i];
+    ll next=l;
+    ll count=0;
+    f(i,0,n)
     {
-        c= a+b;
-        sum += c*c;
-        cout<<c<<" "<<sum<<"\n";
-        a=b;
-        b=c;
-        
+        if(a[i]>next)
+        {
+            count++;
+            next = a[i-1]+l;
+            i--;
+        }
     }
-    
-    return 0;
+    cout<<count;
 }

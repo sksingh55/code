@@ -15,19 +15,30 @@ using namespace std;
 typedef long long int ll;
 
 int main() {
-    ll n;
-    cin>>n;
-    ll a=0,b=1,c;
-    ll sum=0;
-    f(i,2,n+1)
+    tc
     {
-        c= a+b;
-        sum += c*c;
-        cout<<c<<" "<<sum<<"\n";
-        a=b;
-        b=c;
+        ll n,k;
+        cin>>n>>k;
+        ll d=n/k;
+        ll r=n%k;
+        string temp;
+        for(ll i=0;i<k;i++)
+        {
+            temp += 'a'+i;
+        }
+        string s;
+        f(i,0,d)
+        {
+            s+=temp;
+        }
+        f(i,0,r)
+        {
+            s+=('a'+i);
+        }
+
+
         
+        sort(s.begin(),s.end());
+        cout<<s<<"\n";
     }
-    
-    return 0;
 }

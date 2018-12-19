@@ -1,0 +1,22 @@
+Question:
+Chef need K units of X number ingredients to prepare for Christmas celebration. Chef when to Alisha's store for ingredient . On Christmas eve, Alisha played a game with chef if he win he will get the ingredients free. Alisha hide the X ingredients in  identical  balls, each containing 1 unit of any one of the ingredient. He place the ball in N identical boxes with each box containing exactly P number of ball and each ball contain same ingredient i.e. each box contain P Ball containing same ingredient.Now Alisha specify that N is multiple of X and exactly N/X boxes contain one type of ingredient i.e. N/X boxes contain  balls with same ingredient.
+Alisha put the boxes in front of chef . Chef has to tell whether he can take exactly  K units of X number of ingredient from boxes . If no print -1 else print number of ball he will take from Yth box.
+
+input will be
+T
+K X N P Y
+constraints
+1<= T <= 10000
+1 <= K,X,N,P,Y <= 10^18
+1 <= Y <= N
+
+
+example 
+3
+2 2 4 2 2
+output :1
+4 2 4 2 2
+output :2
+2 3 6 2 2
+output :1
+
