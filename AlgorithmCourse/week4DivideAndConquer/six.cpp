@@ -129,6 +129,6 @@ int main() {
         p[i].y=y;
     }
     
-    cout<<closest(p,n);
+    cout<<setprecision(20)<<closest(p,n);
 
 }
