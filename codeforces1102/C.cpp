@@ -16,5 +16,33 @@ typedef long long int ll;
 
 int main()
 {
+	ll n,x,y;
+	cin>>n>>x>>y;
+	ll a[n+1];
+	ll ans=0;
+	f(i,0,n)
+	{
+		cin>>a[i];
+	}
+	if(y<x)
+	{
+		ans=n;
+	}
+	else
+	{
+		f(i,0,n)
+		{
+			if(a[i]<=x)
+				ans++;
+		}
+		
+		if(ans%2!=0)
+			ans++;
+		ans = ans/2;
+
+	}
+	cout<<ans;
+
+	
    
 }
