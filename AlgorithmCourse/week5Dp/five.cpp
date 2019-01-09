@@ -1,24 +1,36 @@
 #include<bits/stdc++.h> 
 using namespace std; 
   
-int X[105],Y[105],Z[105]; 
+long long int X[105],Y[105],Z[105]; 
   
-int dp[105][105][105]; 
+long long int dp[105][105][105]; 
   
-/* Returns length of LCS for X[0..m-1], Y[0..n-1] 
-and Z[0..o-1] */
-int lcsOf3(int i, int j,int k) 
+int lcsOf3(  int m, int n, int o) 
 { 
-    if(i==-1||j==-1||k==-1) 
-        return 0; 
-    if(dp[i][j][k]!=-1) 
-        return dp[i][j][k]; 
-      
-    if(X[i]==Y[j] && Y[j]==Z[k]) 
-        return dp[i][j][k] = 1+lcsOf3(i-1,j-1,k-1); 
-    else
-        return dp[i][j][k] = max(max(lcsOf3(i-1,j,k), 
-                            lcsOf3(i,j-1,k)),lcsOf3(i,j,k-1)); 
+    int L[m+1][n+1][o+1]; 
+  
+    for (int i=0; i<=m; i++) 
+    { 
+        for (int j=0; j<=n; j++) 
+        { 
+            for (int k=0; k<=o; k++) 
+            { 
+                if (i == 0 || j == 0||k==0) 
+                    L[i][j][k] = 0; 
+  
+                else if (X[i-1] == Y[j-1] && X[i-1]==Z[k-1]) 
+                    L[i][j][k] = L[i-1][j-1][k-1] + 1; 
+  
+                else
+                    L[i][j][k] = max(max(L[i-1][j][k], 
+                                         L[i][j-1][k]), 
+                                     L[i][j][k-1]); 
+            } 
+        } 
+    } 
+  
+    
+    return L[m][n][o]; 
 } 
   
 // Driver code 
@@ -38,6 +50,6 @@ int main()
     for(int i=0;i<o;i++)
     cin>>Z[i];  
   
-    cout << lcsOf3(m-1,n-1,o-1); 
+    cout << lcsOf3(m,n,o); 
 // this code is contributed by Kushdeep Mittal 
 } 
