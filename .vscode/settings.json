@@ -1,0 +1,19 @@
+{
+    "code-runner.runInTerminal": true,
+    "code-runner.saveFileBeforeRun": true,
+    "code-runner.executorMap": {
+        "cpp": "g++ $fullFileName -o Executable && ./Executable"
+    },
+    "code-runner.preserveFocus": false,
+    "code-runner.ignoreSelection": true,
+    "files.associations": {
+        "iostream": "cpp",
+        "*.tcc": "cpp",
+        "tuple": "cpp",
+        "cmath": "cpp",
+        "functional": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "ostream": "cpp"
+    },
+}
