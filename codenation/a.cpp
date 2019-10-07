@@ -1,26 +1,96 @@
-#include <bits/stdc++.h>
-#define vec(a) vector<a>
-#define vecp(a, b) vector<pair<a, b>>
-#define pb push_back
-#define minpq priority_queue<long long int, vector<long long int>, greater<long long int>> pq;
-#define f(i, a, b) for (long long int i = a; i < b; i++)
-#define fr(i, a, b) for (long long int i = a; i >= b; i--)
-#define tc             \
-    long long int t;   \
-    scanf("%lld", &t); \
-    while (t--)
-#define mp make_pair
-#define mapp(a, b) map<a, b>
-#define umapp(a, b) unordered_map<a, b>
-#define mem(d, val) memset(d, val, sizeof(d))
-#define modd 1000000000000007
-#define MAX 300005
-#define SPEEDUP ios_base::sync_with_stdio(false);
-using namespace std;
-typedef long long int ll;
+#include <map>
+#include <set>
+#include <list>
+#include <cmath>
+#include <ctime>
+#include <deque>
+#include <queue>
+#include <stack>
+#include <string>
+#include <bitset>
+#include <cstdio>
+#include <limits>
+#include <vector>
+#include <climits>
+#include <cstring>
+#include <cstdlib>
+#include <fstream>
+#include <numeric>
+#include <sstream>
+#include <iostream>
+#include <algorithm>
+#include <unordered_map>
+#define ll long long int
 
+using namespace std;
+
+ll solve(string str, string pat)
+{
+    ll n1 = str.length();
+    ll n2 = pat.length();
+    if (n1 < n2)
+    {
+        return -1;
+    }
+    ll freq1[256] = {0};
+    ll freq2[256] = {0};
+
+    for (ll i = 0; i < n2; i++)
+        freq1[pat[i]]++;
+
+    ll start = 0, begin = -1, ans = INT_MAX;
+
+    ll count = 0;
+    for (ll j = 0; j < n1; j++)
+    {
+        freq2[str[j]]++;
+        if (freq1[str[j]] != 0 && freq2[str[j]] <= freq1[str[j]])
+            count++;
+        if (count == n2)
+        {
+            while (freq2[str[start]] > freq1[str[start]] || freq1[str[start]] == 0)
+            {
+                if (freq2[str[start]] > freq1[str[start]])
+                    freq2[str[start]]--;
+                start++;
+            }
+            ll lw = j - start + 1;
+            if (ans > lw)
+            {
+                ans = lw;
+                begin = start;
+            }
+        }
+    }
+    if (begin == -1)
+    {
+        return -1;
+    }
+    return ans;
+}
 int main()
 {
-    SPEEDUP
-    
+    ll n ;
+    cin>>n;
+    string s;
+    cin>>s;
+    ll count[256]={0};
+    for(ll i =0;i<n;i++){
+        count[s[i]]++;
+    }
+    string k;
+    for(ll i='0';i<='9';i++){
+        if(count[i]%2!=0){
+            k+=i;
+        }
+    }
+    if(k.length()==0){
+        cout<<-1;
+    }
+    else{
+        cout<<solve(s,k)-1;
+    }
+    return 0;
 }
+
+

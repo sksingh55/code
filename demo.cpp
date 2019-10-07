@@ -5,9 +5,9 @@
 #define minpq priority_queue<long long int, vector<long long int>, greater<long long int>> pq;
 #define f(i, a, b) for (long long int i = a; i < b; i++)
 #define fr(i, a, b) for (long long int i = a; i >= b; i--)
-#define tc           \
-	long long int t; \
-	scanf("%lld",&t);        \
+#define tc             \
+	long long int t;   \
+	scanf("%lld", &t); \
 	while (t--)
 #define mp make_pair
 #define mapp(a, b) map<a, b>
@@ -15,48 +15,85 @@
 #define mem(d, val) memset(d, val, sizeof(d))
 #define modd 1000000007
 #define MAX 300005
-#define SPEEDUP ios_base::sync_with_stdio(false); 
+#define SPEEDUP ios_base::sync_with_stdio(false);
 using namespace std;
-typedef  long long int ll;
+typedef long long int ll;
+
+class PermutationUsingRecursion
+{
+public: vec(string) ans;
+public: 
+vector<string> getSol(string s){
+	permuteString(s);
+	return ans;
+}
+
+public:
+	void permuteString(string s)
+	{
+		map<char, int> freq;
+		int n = s.length();
+		f(i, 0, n)
+		{
+			freq[s[i]]++;
+		}
+		vector<char> str;
+		int count[freq.size() + 1] = {0};
+		map<char, int>::iterator it;
+		int index = 0;
+		for (it = freq.begin(); it != freq.end(); it++)
+		{
+			str.pb(it->first);
+			count[index] = it->second;
+			index++;
+		}
+		char result[n];
+		permute(result, str, count, 0, n);
+	}
+
+private:
+	void insertAns(char result[], int n)
+	{
+		string s = "";
+		f(i, 0, n)
+		{
+			s += result[i];
+		}
+		ans.pb(s);
+	}
+
+private:
+	void permute(char result[], vector<char> str, int count[], int level, int n)
+	{
+		if (level == n)
+		{
+			insertAns(result, n);
+			return;
+		}
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (count[i] == 0)
+			{
+				continue;
+			}
+			count[i]--;
+			result[level] = str[i];
+			permute(result, str, count, level + 1, n);
+			count[i]++;
+		}
+	}
+};
 
 int main()
 {
 	SPEEDUP
 	tc{
-		ll n;
-		scanf("%lld",&n);
-		double arr[n+5];
-		f(i,1,n+1){
-			scanf("%lf",&arr[i]);
-		}
-		double x;
-		scanf("%lf",&x);
-		ll A[n+5]={0};
-		ll B[n+5]={0};
-		f(i,1,n+1){
-			A[i] = A[i-1]+ceil(arr[i]/x);
-		}
-		for(int i=n;i>0;i--){
-			B[i] = B[i+1]+ceil(arr[i]);
-		}
-		int i;
-		for(i=1;i<n-1;i++){
-			if(A[i]<B[i+2]){
-				continue;
-			}
-			else if(A[i]==B[i+2]){
-				if(i<(n-i-1)){
-					break;
-				}
-				else{
-					i++;
-					break;
-				}
-			}
-			else{
-				break;
-			}
-		}
-		cout<<i<<" "<<n-i<<"\n";
+	string s;
+	cin >> s;
+	vec(string)ans = PermutationUsingRecursion().getSol(s);
+	f(i,0,ans.size()){
+		cout<<ans[i]<<" ";
+	}
+	cout<<"\n";
 	}
 }

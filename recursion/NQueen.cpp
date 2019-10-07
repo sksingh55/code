@@ -20,16 +20,20 @@
 using namespace std;
 typedef long long int ll;
 
-class RatInMaze
+class NQueens
 {
     vec(vec(int)) ans;
 
 public:
-    void solve(int n, vec(vec(int)) v)
+    void solve(int n)
     {
         initialize(n);
-        startVisit(0, 0, n, v);
-        print(n);
+        if (startVisit(0, n))
+            print(n);
+        else
+        {
+            cout << "fail";
+        }
     }
 
 private:
@@ -60,49 +64,74 @@ private:
     }
 
 private:
-    bool isSafe(int i, int j, vec(vec(int)) v, int n)
+    bool isSafe(int row, int col, int n)
     {
-        if (i < 0 || i >= n || j < 0 || j >= n || v[i][j] == 0)
+        int i, j;
+        for (i = 0; i < col; i++)
         {
-            return false;
+            if (ans[row][i])
+            {
+                return false;
+            }
         }
+        for (i = 0; i < row; i++)
+        {
+            if (ans[i][col])
+            {
+                return false;
+            }
+        }
+
+        for (i = row, j = col; i >= 0 && j >= 0; i--, j--)
+        {
+            if (ans[i][j])
+            {
+                return false;
+            }
+        }
+
+        for (i = row, j = col; j < n && i >= 0; i--, j++)
+        {
+            if (ans[i][j])
+            {
+                return false;
+            }
+        }
+
         return true;
     }
 
 private:
-    bool startVisit(int i, int j, int n, vec(vec(int)) v)
+    bool startVisit(int row, int n)
     {
 
-        if (i == n - 1 && j == n - 1)
+        if (row >= n)
         {
-            ans[i][j] = 1;
             return true;
         }
-        if (isSafe(i, j, v, n))
+        for (int i = 0; i < n; i++)
         {
-            ans[i][j] = 1;
-            if (startVisit(i + 1, j, n, v))
+            if (isSafe(row, i, n))
             {
-                return true;
+                ans[row][i] = 1;
+                if (startVisit(row + 1, n))
+                {
+                    return true;
+                }
+                ans[row][i] = 0;
             }
-            if (startVisit(i, j + 1, n, v))
-            {
-                return true;
-            }
-            ans[i][j] = 0;
         }
-
         return false;
     }
 };
 
 int main()
 {
-    vector<vec(int)> maze = {{1, 0, 0, 0},
-                             {1, 1, 0, 1},
-                             {0, 1, 0, 0},
-                             {1, 1, 1, 1}};
-
-    RatInMaze().solve(4, maze);
+    tc
+    {
+        int n;
+        cin >> n;
+        NQueens().solve(n);
+    }
     return 0;
 }
