@@ -32,9 +32,9 @@ mdb-tables -1 ActiveStudents1819_Alldist_2.accdb
 
 mdb-export ActiveStudents1819_Alldist_2.accdb 'dbo_ActiveStudents1819_Alldist_1' -H -D
 
-mdb-tables -1 ActiveStudents1819_Alldist_9.accdb | while read -r tablename; do
+mdb-tables -1 ActiveStudents1819_Alldist_3.accdb | while read -r tablename; do
      fname=$(echo "$tablename" | tr -d '()' | tr ' ' '_').csv
      echo "Extracting $tablename to $fname"
-     mdb-export -D '%Y-%m-%d %H:%M:%S' ActiveStudents1819_Alldist_9.accdb "$tablename" > "$fname"
+     mdb-export -D '%Y-%m-%d %H:%M:%S' ActiveStudents1819_Alldist_3.accdb "$tablename" > "$fname"
   done
-
+  

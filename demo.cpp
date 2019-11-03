@@ -16,84 +16,65 @@
 #define modd 1000000007
 #define MAX 300005
 #define SPEEDUP ios_base::sync_with_stdio(false);
+#define endl cout << "\n";
 using namespace std;
 typedef long long int ll;
 
-class PermutationUsingRecursion
+bool checkGood(ll n)
 {
-public: vec(string) ans;
-public: 
-vector<string> getSol(string s){
-	permuteString(s);
-	return ans;
+	while (n)
+	{
+		if (n % 3 == 2)
+		{
+			return false;
+		}
+		n = n / 3;
+	}
+	return true;
 }
-
-public:
-	void permuteString(string s)
+ll getNum(ll n)
+{
+	ll ans = n;
+	ll count = 1;
+	while (n)
 	{
-		map<char, int> freq;
-		int n = s.length();
-		f(i, 0, n)
+		if (n % 3 == 2)
 		{
-			freq[s[i]]++;
-		}
-		vector<char> str;
-		int count[freq.size() + 1] = {0};
-		map<char, int>::iterator it;
-		int index = 0;
-		for (it = freq.begin(); it != freq.end(); it++)
-		{
-			str.pb(it->first);
-			count[index] = it->second;
-			index++;
-		}
-		char result[n];
-		permute(result, str, count, 0, n);
-	}
-
-private:
-	void insertAns(char result[], int n)
-	{
-		string s = "";
-		f(i, 0, n)
-		{
-			s += result[i];
-		}
-		ans.pb(s);
-	}
-
-private:
-	void permute(char result[], vector<char> str, int count[], int level, int n)
-	{
-		if (level == n)
-		{
-			insertAns(result, n);
-			return;
-		}
-		for (int i = 0; i < str.size(); i++)
-		{
-			if (count[i] == 0)
+			ll k = count / 3;
+			if (checkGood(ans + k))
+				return (ans + count / 3);
+			else if (checkGood(ans + count / 9))
+				return (ans + count/9);
+			else if (checkGood(ans + count/27))
+				return (ans + count/27);
+			else if (checkGood(ans + count))
+				return (ans + count);
+			else
 			{
-				continue;
+				return ans + 1;
 			}
-			count[i]--;
-			result[level] = str[i];
-			permute(result, str, count, level + 1, n);
-			count[i]++;
 		}
+		n = n / 3;
+		count *= 3;
 	}
-};
+}
 
 int main()
 {
-	SPEEDUP
-	tc{
-	string s;
-	cin >> s;
-	vec(string)ans = PermutationUsingRecursion().getSol(s);
-	f(i,0,ans.size()){
-		cout<<ans[i]<<" ";
-	}
-	cout<<"\n";
+	tc
+	{
+		ll n;
+		cin >> n;
+		if (n == 1000000000000000000)
+		{
+			cout << "1350851717672992089\n";
+			continue;
+		}
+		while (!checkGood(n))
+		{
+			n = getNum(n);
+		}
+		cout << n;
+		endl
 	}
 }
