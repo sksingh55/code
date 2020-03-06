@@ -12,8 +12,6 @@ ll b[100000];
 void merge(ll arr[],ll low,ll mid, ll high)
 {
 	ll l1,l2,i;
-	
-
    for(l1 = low, l2 = mid + 1, i = low; l1 <= mid && l2 <= high; i++) 
    {
       if(arr[l1] <= arr[l2])

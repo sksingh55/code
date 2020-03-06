@@ -37,6 +37,7 @@ vector<int> inorderTraversal(TreeNode *root)
             curr = store.top();
             store.pop();
             ans.pb(curr->val);
+            curr = curr->right;
         }
     }
     return ans;
